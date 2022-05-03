@@ -1,0 +1,97 @@
+package controller;
+
+
+public class Demo {
+
+    public static void main(String[] args) {
+
+        Cake myCake = new BaseCakeDecorator();
+        myCake = new WhippedCreamDecorator(myCake);
+        myCake = new SprinklesDecorator(myCake);
+        myCake = new FrostingDecorator(myCake);
+        myCake = new FruitDecorator(myCake);
+
+        new FruitDecorator(new FrostingDecorator(new SprinklesDecorator(new WhippedCreamDecorator(new BaseCakeDecorator()))));
+
+        System.out.println(myCake.costs());
+        System.out.printf(myCake.ingredients());
+    }
+}
+
+ abstract class Cake{
+    public abstract double costs();
+    public abstract String ingredients();
+}
+
+class WhippedCreamDecorator extends Cake{
+    protected  Cake cake;
+    public WhippedCreamDecorator(Cake cake){
+        this.cake = cake;
+    }
+    @Override
+    public double costs() {
+        return this.cake.costs() + 2;
+    }
+    @Override
+    public String ingredients() {
+        return this.cake.ingredients() + "\n Whipped cream";
+    }
+}
+
+class SprinklesDecorator extends Cake{
+    public SprinklesDecorator(Cake cake) {
+        this.cake = cake;
+    }
+    protected Cake cake;
+    @Override
+    public double costs() {
+        return this.cake.costs() + 1.25;
+    }
+    @Override
+    public String ingredients() {
+        return this.cake.ingredients() + "\n Sprinkles";
+    }
+}
+
+class FruitDecorator extends Cake{
+    public FruitDecorator(Cake cake) {
+        this.cake = cake;
+    }
+    protected Cake cake;
+    @Override
+    public double costs() {
+        return this.cake.costs() + 3.75;
+    }
+    @Override
+    public String ingredients() {
+        return this.cake.ingredients() + "\n Fruit";
+    }
+}
+
+class FrostingDecorator extends Cake{
+    public FrostingDecorator(Cake cake) {
+        this.cake = cake;
+    }
+    protected Cake cake;
+    @Override
+    public double costs() {
+        return this.cake.costs() + 1;
+    }
+    @Override
+    public String ingredients() {
+        return this.cake.ingredients() + "\n Frosting";
+    }
+}
+
+class BaseCakeDecorator extends Cake{
+    public BaseCakeDecorator() {
+    }
+    @Override
+    public double costs() {
+        return 5;
+    }
+    @Override
+    public String ingredients() {
+        return "A cake with: ";
+    }
+}
