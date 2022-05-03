@@ -1,61 +1,48 @@
 package controller;
+import java.util.Scanner;
+//Returns an e-book or the hardcopy, based on the readers' age.
 
 public class Demo {
 
-
     public static void main(String[] args) {
-        PizzaMaker pizzaMaker = new PizzaMaker();
-        pizzaMaker.preparePeperoniPizza();
-        pizzaMaker.prepareHawaiPizza();
-        pizzaMaker.prepareTonnoPizza();
-        
+        LibraryProxy library = new LibraryProxy();
+        System.out.println("What's your age");
+        Scanner keyboard = new Scanner(System.in);
+        int ageReader = keyboard.nextInt();
+        library.returnBook(ageReader);
+
     }
 }
-class PizzaMaker{
-    private Pizza peperoniPizza;
-    private Pizza hawaiPizza;
-    private Pizza tonnoPizza;
-
-    //Facade
-    public PizzaMaker(){
-        peperoniPizza = new PeperoniPizza();
-        hawaiPizza = new HawaiPizza();
-        tonnoPizza = new TonnoPizza();
-
-    }
-    public void preparePeperoniPizza(){
-        peperoniPizza.prepare();
-    }
-
-    public void prepareHawaiPizza(){
-        hawaiPizza.prepare();
-    }
-
-    public void prepareTonnoPizza(){
-        tonnoPizza.prepare();
-    }
-}
-// Concrete classes
-class PeperoniPizza implements Pizza{
-
+class LibraryProxy implements Book{
 
     @Override
-    public void prepare() {
-
+    public void returnBook(int age) {
+        if (age<25){
+            Book book = new eBook();
+            book.returnBook(age);
+        }else {
+            Book book = new fullBook();
+            book.returnBook(age);
+        }
     }
 }
-class HawaiPizza implements Pizza{
+
+class eBook implements Book{
+
     @Override
-    public void prepare() {
-
+    public void returnBook(int age) {
+        System.out.println("Returns the e-book");
     }
 }
 
-class TonnoPizza implements Pizza{
+class fullBook implements Book{
+
     @Override
-    public void prepare() {
+    public void returnBook(int age) {
+        System.out.println("Returns the hardcopy");
     }
 }
+
 
 //////interface//////
 public interface Pizza {
