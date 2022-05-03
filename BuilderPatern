@@ -1,0 +1,48 @@
+public class Demo {
+    public static void main(String[] args) {
+
+        String eersteQuiz = new QuizBuilder("eersteQuiz","Vraag 1","Antwoord 1").withAnswer2("Antwoord2").toString();
+
+        System.out.println(eersteQuiz);
+
+
+
+    }
+}
+
+ class QuizBuilder{
+    private String naam;
+    private String question;
+    private String answer1;
+    private String answer2;
+    private String answer3;
+    private String answer4;
+
+
+    public QuizBuilder(String naam, String question, String answer1) {
+        this.naam = naam;
+        this.question = question;
+        this.answer1 = answer1;
+    }
+
+    public QuizBuilder withAnswer2(String answer2){
+        this.answer2 = answer2;
+        return  this;
+    }
+
+    public QuizBuilder withAnswer3(String answer3){
+        this.answer2 = answer3;
+        return  this;
+    }
+
+    public QuizBuilder withAnswer4(String answer4){
+        this.answer2 = answer4;
+        return  this;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("naam: %s, question: %s, answer1: %s, answer2: %s, answer3: %s, answer4: %s",
+                this.naam, this.question, this.answer1, this.answer2, this.answer3, this.answer4);
+    }
+}
