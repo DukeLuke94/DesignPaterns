@@ -1,0 +1,60 @@
+public class Demo {
+    public static void main(String[] args) {
+        MilkFactory factory = new MilkFactory();
+        Milkable glass = factory.getMilk(10);
+        glass.makeMilk();
+
+        Milkable bottle = factory.getMilk(5);
+        bottle.makeMilk();
+
+
+
+    }
+}
+
+class MilkFactory {
+    public Milkable getMilk(int vetpercentage){
+        if (vetpercentage==5){
+            return new Donkey();
+        }else if (vetpercentage==10){
+            return new Goat();
+        }else if (vetpercentage==15){
+            return new Cow();
+        }
+
+        return null;
+    }
+
+}
+
+class Cow implements Milkable{
+
+    @Override
+    public void makeMilk() {
+        System.out.println("15% koemelk");
+
+    }
+}
+
+class Goat implements Milkable{
+
+    @Override
+    public void makeMilk() {
+        System.out.println("10% geitenmelk");
+    }
+}
+
+class Donkey implements Milkable{
+
+    @Override
+    public void makeMilk() {
+        System.out.println("5% ezelmelk");
+    }
+}
+
+//////////////////////////////
+
+public interface Milkable {
+    void makeMilk();
+
+}
