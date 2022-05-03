@@ -24,7 +24,7 @@ public class Demo {
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("What pizza would you like to order");
-        String pizza = keyboard.next().toLowerCase(Locale.ROOT);
+        String pizza = keyboard.nextLine().toLowerCase(Locale.ROOT);
         System.out.println("You ordered: " +pizza);
 
         AbstractAdder adderChain = getChainOfLoggers();
@@ -73,7 +73,7 @@ class TomatoAdder extends AbstractAdder{
 class PepperoniAdder extends AbstractAdder{
     @Override
     protected void MakePizza(String pizza) {
-        if (pizza.contains("pepperoni")){
+        if (pizza.contains("pepperoni")&&!pizza.contains("vegan")){
             System.out.println("Adding pepperoni");
         }
 
@@ -93,7 +93,7 @@ class CheeseAdder extends AbstractAdder{
 
     @Override
     protected void MakePizza(String pizza) {
-        if (!pizza.contains("vegetarian")){
+        if (!pizza.contains("vegan")){
             System.out.println("Adding cheese");
         }
     }
