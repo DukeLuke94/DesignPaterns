@@ -1,0 +1,58 @@
+package controller;
+
+public class Demo {
+
+
+    public static void main(String[] args) {
+        PizzaMaker pizzaMaker = new PizzaMaker();
+        pizzaMaker.preparePeperoniPizza();
+        pizzaMaker.prepareHawaiPizza();
+        pizzaMaker.prepareTonnoPizza();
+        
+    }
+}
+class PizzaMaker{
+    private Pizza peperoniPizza;
+    private Pizza hawaiPizza;
+    private Pizza tonnoPizza;
+
+    //Facade
+    public PizzaMaker(){
+        peperoniPizza = new PeperoniPizza();
+        hawaiPizza = new HawaiPizza();
+        tonnoPizza = new TonnoPizza();
+
+    }
+    public void preparePeperoniPizza(){
+        peperoniPizza.prepare();
+    }
+
+    public void prepareHawaiPizza(){
+        hawaiPizza.prepare();
+    }
+
+    public void prepareTonnoPizza(){
+        tonnoPizza.prepare();
+    }
+}
+// Concrete classes
+class PeperoniPizza implements Pizza{
+
+
+    @Override
+    public void prepare() {
+
+    }
+}
+class HawaiPizza implements Pizza{
+    @Override
+    public void prepare() {
+
+    }
+}
+
+class TonnoPizza implements Pizza{
+    @Override
+    public void prepare() {
+    }
+}
