@@ -1,0 +1,51 @@
+package controller;
+import java.util.Scanner;
+//Returns a summary or the full book, based on the readers' age.
+
+public class Demo {
+    
+    public static void main(String[] args) {
+        LibraryProxy library = new LibraryProxy();
+        System.out.println("What's your age");
+        Scanner keyboard = new Scanner(System.in);
+        int ageReader = keyboard.nextInt();
+        library.returnBook(ageReader);
+
+    }
+}
+class LibraryProxy implements Book{
+
+    @Override
+    public void returnBook(int age) {
+        if (age<25){
+            Book book = new emptyBook();
+            book.returnBook(age);
+        }else {
+            Book book = new fullBook();
+            book.returnBook(age);
+        }
+
+    }
+}
+
+class emptyBook implements Book{
+
+    @Override
+    public void returnBook(int age) {
+        System.out.println("Returns the summary");
+    }
+}
+
+class fullBook implements Book{
+
+    @Override
+    public void returnBook(int age) {
+        System.out.println("Returns the full book");
+    }
+}
+
+//////////interface////////////
+
+public interface Book {
+    void returnBook(int age);
+}
