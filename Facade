@@ -56,3 +56,8 @@ class TonnoPizza implements Pizza{
     public void prepare() {
     }
 }
+
+//////interface//////
+public interface Pizza {
+    void prepare();
+}
