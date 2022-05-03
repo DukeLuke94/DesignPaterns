@@ -1,0 +1,103 @@
+package controller;
+
+
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Demo {
+
+    static AbstractAdder getChainOfLoggers(){
+        DoughAdder doughAdder = new DoughAdder();
+        TomatoAdder tomatoAdder = new TomatoAdder();
+        PepperoniAdder pepperoniAdder = new PepperoniAdder();
+        PineappleAdder pineappleAdder = new PineappleAdder();
+        CheeseAdder cheeseAdder = new CheeseAdder();
+
+        doughAdder.setNextAdder(tomatoAdder);
+        tomatoAdder.setNextAdder(pepperoniAdder);
+        pepperoniAdder.setNextAdder(pineappleAdder);
+        pineappleAdder.setNextAdder(cheeseAdder);
+
+        return doughAdder;
+    }
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("What pizza would you like to order");
+        String pizza = keyboard.next().toLowerCase(Locale.ROOT);
+        System.out.println("You ordered: " +pizza);
+
+        AbstractAdder adderChain = getChainOfLoggers();
+        adderChain.checkIngredient(pizza);
+
+        }
+
+    }
+
+ abstract class AbstractAdder{
+    protected AbstractAdder nextAdder;
+    public void setNextAdder(AbstractAdder nextAdder){
+        this.nextAdder = nextAdder;
+    }
+
+    public void checkIngredient(String pizza){
+            MakePizza(pizza);
+        if(nextAdder != null){
+            nextAdder.checkIngredient(pizza);
+        }
+    }
+
+    abstract protected void MakePizza(String pizza);
+}
+
+class DoughAdder extends AbstractAdder{
+    @Override
+    protected void MakePizza(String pizza) {
+        if (pizza!=null){
+            System.out.println("Making Dough");
+        }
+
+    }
+}
+
+class TomatoAdder extends AbstractAdder{
+    @Override
+    protected void MakePizza(String pizza) {
+        if (pizza!=null){
+            System.out.println("Adding tomatosauce");
+        }
+
+    }
+}
+
+class PepperoniAdder extends AbstractAdder{
+    @Override
+    protected void MakePizza(String pizza) {
+        if (pizza.contains("pepperoni")){
+            System.out.println("Adding pepperoni");
+        }
+
+    }
+}
+
+class PineappleAdder extends AbstractAdder{
+    @Override
+    protected void MakePizza(String pizza) {
+        if (pizza.contains("hawai")){
+            System.out.println("Adding pineapple, you maniac");
+        }
+    }
+}
+
+class CheeseAdder extends AbstractAdder{
+
+    @Override
+    protected void MakePizza(String pizza) {
+        if (!pizza.contains("vegetarian")){
+            System.out.println("Adding cheese");
+        }
+    }
+}
+
+
+
